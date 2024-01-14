@@ -61,17 +61,21 @@ const readByFiltro = async (req, res) => {
 
 const readByid = async (req, res) => {
     const { id } = req.params;
-    console.log('id captado por params' + id);
-
+    
     try {
-        console.log('antes de entrar a la funcion obtenerJoyasPor Id');
-        const joyas = await obtenerJoyeriaPorId({ id });
+        const joya = await obtenerJoyeriaPorId({ id });
 
-        if (!joyas) {
-            res.status(404).json({ message: "joyas not found" });
+        if (!joya) {
+            return res.status(404).json({ message: "Joyas not found" });
         }
 
-        res.json(joyas);
+        const detailedResponse = {
+            id: joya.id,
+            nombre: joya.nombre,
+            precio: joya.precio,
+        };
+
+        res.json(detailedResponse);
     } catch (error) {
         const { status, message } = handleError(error.code);
         return res.status(status).json({ ok: false, result: message });
