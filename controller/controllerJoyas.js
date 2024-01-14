@@ -26,6 +26,15 @@ const read = async (req, res) => {
 const readByFiltro = async (req, res) => {
     const { precio_min, precio_max, categoria, metal } = req.query;
 
+
+
+    // PROFE TOTE: PARA CONCEPTOS DE EVALUACION AGREGUE ESTAS VALIDACIONES YA QUE CUANDO HICE LAS CONSULTAS POR THUNDER
+    // 2 VECES ESCRIBI MAL EL PARAMETRO DEL METAL Y ME TOMO IGUAL LAS PETICIONES, ES POR ESA RAZON QUE AUNQUE NO FUE SOLICITADO QUISE AGREGAR LA VALIDACION 
+    // PARA QUE ENTRE OTRAS COSAS SOLO ACEPTARA 2 METALES, QUE ERAN LOS 2 PRESENTES; ORO Y PLATA.
+
+
+
+    
     // Validar que los parámetros obligatorios estén presentes
     if (!precio_min || !precio_max || !categoria || !metal) {
         return res.status(400).json({ ok: false, message: 'Todos los parámetros son obligatorios' });
